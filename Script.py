@@ -63,7 +63,9 @@ print('------------------------------------------------------------')
 print(validator.head())
 print('------------------------------------------------------------')
 
-
+validator.expect_column_values_to_not_be_null(
+    column="Region"
+)
 validator.save_expectation_suite(discard_failed_expectations=False)
 checkpoint_config = {
     "class_name": "SimpleCheckpoint",
