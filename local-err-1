@@ -1,0 +1,140 @@
+-----------------------------------------
+hey
+-----------------------------------------
+-----------------------------------------
+created
+-----------------------------------------
+-----------------------------------------
+contex
+-----------------------------------------
+Attempting to instantiate class from config...
+	Instantiating as a Datasource, since class_name is Datasource
+23/08/10 13:20:02 WARN Utils: Your hostname, DataChefs-MacBook-Pro.local resolves to a loopback address: 127.0.0.1; using 172.18.1.252 instead (on interface en0)
+23/08/10 13:20:02 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+23/08/10 13:20:03 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+	Successfully instantiated Datasource
+
+
+ExecutionEngine class name: SparkDFExecutionEngine
+Data Connectors:
+	default_inferred_data_connector_name : InferredAssetS3DataConnector
+
+	Available data_asset_names (2 of 2):
+		wholesale/Wholesale customers data (1 of 1): ['wholesale/Wholesale customers data.csv']
+		wholesale/sales (1 of 1): ['wholesale/sales.csv']
+
+	Unmatched data_references (0 of 0):[]
+
+	default_runtime_data_connector_name:RuntimeDataConnector
+
+	Available data_asset_names (0 of 0):
+		Note : RuntimeDataConnector will not have data_asset_names until they are passed in through RuntimeBatchRequest
+
+	Unmatched data_references (0 of 0): []
+
+-----------------------------------------
+tested
+-----------------------------------------
+-----------------------------------------
+suite
+-----------------------------------------
+-----------------------------------------
+request
+-----------------------------------------
+23/08/10 13:20:08 WARN FileStreamSink: Assume no metadata directory. Error while looking for metadata directory in the path: s3a://dataquality-dc/wholesale/sales.csv.
+java.lang.RuntimeException: java.lang.ClassNotFoundException: Class org.apache.hadoop.fs.s3a.S3AFileSystem not found
+	at org.apache.hadoop.conf.Configuration.getClass(Configuration.java:2688)
+	at org.apache.hadoop.fs.FileSystem.getFileSystemClass(FileSystem.java:3431)
+	at org.apache.hadoop.fs.FileSystem.createFileSystem(FileSystem.java:3466)
+	at org.apache.hadoop.fs.FileSystem.access$300(FileSystem.java:174)
+	at org.apache.hadoop.fs.FileSystem$Cache.getInternal(FileSystem.java:3574)
+	at org.apache.hadoop.fs.FileSystem$Cache.get(FileSystem.java:3521)
+	at org.apache.hadoop.fs.FileSystem.get(FileSystem.java:540)
+	at org.apache.hadoop.fs.Path.getFileSystem(Path.java:365)
+	at org.apache.spark.sql.execution.streaming.FileStreamSink$.hasMetadata(FileStreamSink.scala:53)
+	at org.apache.spark.sql.execution.datasources.DataSource.resolveRelation(DataSource.scala:366)
+	at org.apache.spark.sql.DataFrameReader.loadV1Source(DataFrameReader.scala:229)
+	at org.apache.spark.sql.DataFrameReader.$anonfun$load$2(DataFrameReader.scala:211)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:211)
+	at org.apache.spark.sql.DataFrameReader.csv(DataFrameReader.scala:538)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:282)
+	at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
+	at py4j.commands.CallCommand.execute(CallCommand.java:79)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:182)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:106)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.ClassNotFoundException: Class org.apache.hadoop.fs.s3a.S3AFileSystem not found
+	at org.apache.hadoop.conf.Configuration.getClassByName(Configuration.java:2592)
+	at org.apache.hadoop.conf.Configuration.getClass(Configuration.java:2686)
+	... 26 more
+Traceback (most recent call last):
+  File "gx.py", line 61, in <module>
+    validator = context_gx.get_validator(
+  File "/Users/datachef/Documents/data-engineering/gx-test/venv/lib/python3.8/site-packages/great_expectations/data_context/data_context/abstract_data_context.py", line 2714, in get_validator
+    self.get_batch_list(
+  File "/Users/datachef/Documents/data-engineering/gx-test/venv/lib/python3.8/site-packages/great_expectations/core/usage_statistics/usage_statistics.py", line 260, in usage_statistics_wrapped_method
+    result = func(*args, **kwargs)
+  File "/Users/datachef/Documents/data-engineering/gx-test/venv/lib/python3.8/site-packages/great_expectations/data_context/data_context/abstract_data_context.py", line 2883, in get_batch_list
+    return self._get_batch_list(
+  File "/Users/datachef/Documents/data-engineering/gx-test/venv/lib/python3.8/site-packages/great_expectations/data_context/data_context/abstract_data_context.py", line 2965, in _get_batch_list
+    return datasource.get_batch_list_from_batch_request(batch_request=result)  # type: ignore[union-attr, return-value, arg-type]
+  File "/Users/datachef/Documents/data-engineering/gx-test/venv/lib/python3.8/site-packages/great_expectations/datasource/new_datasource.py", line 191, in get_batch_list_from_batch_request
+    ) = data_connector.get_batch_data_and_metadata(  # type: ignore[call-arg]
+  File "/Users/datachef/Documents/data-engineering/gx-test/venv/lib/python3.8/site-packages/great_expectations/datasource/data_connector/runtime_data_connector.py", line 215, in get_batch_data_and_metadata
+    batch_data, batch_markers = self._execution_engine.get_batch_data_and_markers(
+  File "/Users/datachef/Documents/data-engineering/gx-test/venv/lib/python3.8/site-packages/great_expectations/execution_engine/sparkdf_execution_engine.py", line 350, in get_batch_data_and_markers
+    batch_data = reader_fn(path)
+  File "/Users/datachef/Documents/data-engineering/gx-test/venv/lib/python3.8/site-packages/pyspark/sql/readwriter.py", line 727, in csv
+    return self._df(self._jreader.csv(self._spark._sc._jvm.PythonUtils.toSeq(path)))
+  File "/Users/datachef/Documents/data-engineering/gx-test/venv/lib/python3.8/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+  File "/Users/datachef/Documents/data-engineering/gx-test/venv/lib/python3.8/site-packages/pyspark/errors/exceptions/captured.py", line 169, in deco
+    return f(*a, **kw)
+  File "/Users/datachef/Documents/data-engineering/gx-test/venv/lib/python3.8/site-packages/py4j/protocol.py", line 326, in get_return_value
+    raise Py4JJavaError(
+py4j.protocol.Py4JJavaError: An error occurred while calling o130.csv.
+: java.lang.RuntimeException: java.lang.ClassNotFoundException: Class org.apache.hadoop.fs.s3a.S3AFileSystem not found
+	at org.apache.hadoop.conf.Configuration.getClass(Configuration.java:2688)
+	at org.apache.hadoop.fs.FileSystem.getFileSystemClass(FileSystem.java:3431)
+	at org.apache.hadoop.fs.FileSystem.createFileSystem(FileSystem.java:3466)
+	at org.apache.hadoop.fs.FileSystem.access$300(FileSystem.java:174)
+	at org.apache.hadoop.fs.FileSystem$Cache.getInternal(FileSystem.java:3574)
+	at org.apache.hadoop.fs.FileSystem$Cache.get(FileSystem.java:3521)
+	at org.apache.hadoop.fs.FileSystem.get(FileSystem.java:540)
+	at org.apache.hadoop.fs.Path.getFileSystem(Path.java:365)
+	at org.apache.spark.sql.execution.datasources.DataSource$.$anonfun$checkAndGlobPathIfNecessary$1(DataSource.scala:724)
+	at scala.collection.immutable.List.map(List.scala:293)
+	at org.apache.spark.sql.execution.datasources.DataSource$.checkAndGlobPathIfNecessary(DataSource.scala:722)
+	at org.apache.spark.sql.execution.datasources.DataSource.checkAndGlobPathIfNecessary(DataSource.scala:551)
+	at org.apache.spark.sql.execution.datasources.DataSource.resolveRelation(DataSource.scala:404)
+	at org.apache.spark.sql.DataFrameReader.loadV1Source(DataFrameReader.scala:229)
+	at org.apache.spark.sql.DataFrameReader.$anonfun$load$2(DataFrameReader.scala:211)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:211)
+	at org.apache.spark.sql.DataFrameReader.csv(DataFrameReader.scala:538)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:282)
+	at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
+	at py4j.commands.CallCommand.execute(CallCommand.java:79)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:182)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:106)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.ClassNotFoundException: Class org.apache.hadoop.fs.s3a.S3AFileSystem not found
+	at org.apache.hadoop.conf.Configuration.getClassByName(Configuration.java:2592)
+	at org.apache.hadoop.conf.Configuration.getClass(Configuration.java:2686)
+	... 29 more
+
