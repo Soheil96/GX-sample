@@ -51,20 +51,20 @@ suite = context_gx.add_expectation_suite(expectation_suite_name)
 batch_request = RuntimeBatchRequest(
     datasource_name="spark_s3",
     data_connector_name="default_runtime_data_connector_name",
-    data_asset_name="sample_data_asset",
+    data_asset_name="sample",
     batch_identifiers={"default_identifier_name": "default_identifier"},
-    runtime_parameters={"path": "s3a://dataquality-dc/wholesale/Wholesale customers data.csv"},
+    runtime_parameters={"path": "s3a://dataquality-dc/wholesale/sales.csv"},
 )
 validator = context_gx.get_validator(
     batch_request=batch_request,
     expectation_suite_name=expectation_suite_name,
 )
+print('------------------------------------------------------------')
 print(validator.head())
-validator.expect_column_values_to_not_be_null(
-    column="Channel"
-)
-validator.save_expectation_suite(discard_failed_expectations=False)
+print('------------------------------------------------------------')
 
+
+validator.save_expectation_suite(discard_failed_expectations=False)
 checkpoint_config = {
     "class_name": "SimpleCheckpoint",
     "validations": [
@@ -74,7 +74,6 @@ checkpoint_config = {
         }
     ],
 }
-
 checkpoint = SimpleCheckpoint(
     f"_tmp_checkpoint_{expectation_suite_name}", context_gx, **checkpoint_config
 )
