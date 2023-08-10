@@ -1,0 +1,57 @@
+-----------------------------------------
+hey
+-----------------------------------------
+-----------------------------------------
+created
+-----------------------------------------
+-----------------------------------------
+contex
+-----------------------------------------
+Attempting to instantiate class from config...
+	Instantiating as a Datasource, since class_name is Datasource
+23/08/10 03:31:31 WARN Utils: Your hostname, DataChefs-MacBook-Pro.local resolves to a loopback address: 127.0.0.1; using 172.18.1.252 instead (on interface en0)
+23/08/10 03:31:31 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+23/08/10 03:31:32 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+	Successfully instantiated Datasource
+
+
+ExecutionEngine class name: SparkDFExecutionEngine
+Data Connectors:
+	default_inferred_data_connector_name : InferredAssetS3DataConnector
+
+	Available data_asset_names (2 of 2):
+		wholesale/Wholesale customers data (1 of 1): ['wholesale/Wholesale customers data.csv']
+		wholesale/sales (1 of 1): ['wholesale/sales.csv']
+
+	Unmatched data_references (0 of 0):[]
+
+	default_runtime_data_connector_name:RuntimeDataConnector
+
+	Available data_asset_names (0 of 0):
+		Note : RuntimeDataConnector will not have data_asset_names until they are passed in through RuntimeBatchRequest
+
+	Unmatched data_references (0 of 0): []
+
+-----------------------------------------
+tested
+-----------------------------------------
+-----------------------------------------
+suite
+-----------------------------------------
+-----------------------------------------
+request
+-----------------------------------------
+Traceback (most recent call last):
+  File "gx.py", line 61, in <module>
+    validator = context_gx.get_validator(
+  File "/Users/datachef/Documents/data-engineering/gx-test/venv/lib/python3.8/site-packages/great_expectations/data_context/data_context/abstract_data_context.py", line 2714, in get_validator
+    self.get_batch_list(
+  File "/Users/datachef/Documents/data-engineering/gx-test/venv/lib/python3.8/site-packages/great_expectations/core/usage_statistics/usage_statistics.py", line 260, in usage_statistics_wrapped_method
+    result = func(*args, **kwargs)
+  File "/Users/datachef/Documents/data-engineering/gx-test/venv/lib/python3.8/site-packages/great_expectations/data_context/data_context/abstract_data_context.py", line 2883, in get_batch_list
+    return self._get_batch_list(
+  File "/Users/datachef/Documents/data-engineering/gx-test/venv/lib/python3.8/site-packages/great_expectations/data_context/data_context/abstract_data_context.py", line 2956, in _get_batch_list
+    raise gx_exceptions.DatasourceError(
+great_expectations.exceptions.exceptions.DatasourceError: Cannot initialize datasource my_s3_datasources, error: The given datasource could not be retrieved from the DataContext; please confirm that your configuration is accurate.
